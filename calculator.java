@@ -3,13 +3,13 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 import java.util.Stack;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 
 public class calculator {
 
@@ -225,7 +225,6 @@ public class calculator {
 				equalsButtonActionPerformed(event); 
 			} // end actionPerformed
 		}); 
-		
 	} // end initialize 
 	
 	private void zeroButtonActionPerformed(ActionEvent event){
@@ -236,82 +235,82 @@ public class calculator {
 	private void oneButtonActionPerformed(ActionEvent event){
 		text.setText(text.getText() + numberButtons[0].getText());
 		initialResult.append(numberButtons[0].getText()); 
-	} // end zeroButtonActionPerformed
+	} // end oneButtonActionPerformed
 	
 	private void twoButtonActionPerformed(ActionEvent event){
 		text.setText(text.getText() + numberButtons[1].getText());
 		initialResult.append(numberButtons[1].getText()); 
-	} // end zeroButtonActionPerformed
+	} // end two ButtonActionPerformed
 	
 	private void threeButtonActionPerformed(ActionEvent event){
 		text.setText(text.getText() + numberButtons[2].getText());
 		initialResult.append(numberButtons[2].getText()); 
-	} // end zeroButtonActionPerformed
+	} // end threeButtonActionPerformed
 	
 	private void fourButtonActionPerformed(ActionEvent event){
 		text.setText(text.getText() + numberButtons[3].getText());
 		initialResult.append(numberButtons[3].getText()); 
-	} // end zeroButtonActionPerformed
+	} // end fourButtonActionPerformed
 	
 	private void fiveButtonActionPerformed(ActionEvent event){
 		text.setText(text.getText() + numberButtons[4].getText());
 		initialResult.append(numberButtons[4].getText()); 
-	} // end zeroButtonActionPerformed
+	} // end fiveButtonActionPerformed
 	
 	private void sixButtonActionPerformed(ActionEvent event){
 		text.setText(text.getText() + numberButtons[5].getText());
 		initialResult.append(numberButtons[5].getText()); 
-	} // end zeroButtonActionPerformed
+	} // end sixButtonActionPerformed
 	
 	private void sevenButtonActionPerformed(ActionEvent event){
 		text.setText(text.getText() + numberButtons[6].getText());
 		initialResult.append(numberButtons[6].getText()); 
-	} // end zeroButtonActionPerformed
+	} // end sevenButtonActionPerformed
 	
 	private void eightButtonActionPerformed(ActionEvent event){
 		text.setText(text.getText() + numberButtons[7].getText());
 		initialResult.append(numberButtons[7].getText()); 
-	} // end zeroButtonActionPerformed
+	} // end eightButtonActionPerformed
 	
 	private void nineButtonActionPerformed(ActionEvent event){
 		text.setText(text.getText() + numberButtons[8].getText());
 		initialResult.append(numberButtons[8].getText()); 
-	} // end zeroButtonActionPerformed
+	} // end nineButtonActionPerformed
 	
 	private void addOppActionPerformed(ActionEvent event){
 		text.setText(text.getText() + addOpp.getText()); 
 		initialResult.append(addOpp.getText()); 
-	} // end equalsButtonActionPerformed
+	} // end addOppButtonActionPerformed
 	
 	private void subOppActionPerformed(ActionEvent event){
 		text.setText(text.getText() + subOpp.getText()); 
 		initialResult.append(subOpp.getText()); 
-	} // end equalsButtonActionPerformed
+	} // end subOppButtonActionPerformed
 	
 	private void multOppActionPerformed(ActionEvent event){
 		text.setText(text.getText() + multOpp.getText()); 
 		initialResult.append(multOpp.getText()); 
-	} // end equalsButtonActionPerformed
+	} // end multOppButtonActionPerformed
 	
 	private void divOppActionPerformed(ActionEvent event){
 		text.setText(text.getText() + divOpp.getText()); 
 		initialResult.append(divOpp.getText()); 
-	} // end equalsButtonActionPerformed
+	} // end divOppButtonActionPerformed
 	
 	private void powOppActionPerformed(ActionEvent event){
 		text.setText(text.getText() + powOpp.getText());
 		initialResult.append(powOpp.getText()); 
-	} // end equalsButtonActionPerformed
+	} // end powOppButtonActionPerformed
 	
 	private void leftPOppActionPerformed(ActionEvent event){
 		text.setText(text.getText() + leftPOpp.getText());
 		initialResult.append(leftPOpp.getText()); 
-	} // end equalsButtonActionPerformed
+	} // end leftPOppButtonActionPerformed
 	
 	private void rightPOppActionPerformed(ActionEvent event){
 		text.setText(text.getText() + rightPOpp.getText()); 
 		initialResult.append(rightPOpp.getText()); 
-	} // end equalsButtonActionPerformed
+	} // end rightsPOppButtonActionPerformed
 	
 	private void clearButtonActionPerformed(ActionEvent event){
 		text.setText(""); 
@@ -319,79 +318,15 @@ public class calculator {
 	} // end clearButtonActionPerformed
 	
 	private void equalsButtonActionPerformed(ActionEvent event){
-		text.setText("result: " + initialResult.toString());
+		text.setText("result: " + evalPost(infixToPostfix(initialResult.toString())));
 	} // end equalsButtonActionPerformed
 
-	public void actionPerformed(ActionEvent e){
-		try {
-			String numOperator = text.getText(); 
-			int currentTotal = Integer.parseInt(numOperator); 
-			
-			if(numOperator.equals("*")){
-				resultTotal *= currentTotal; 
-			} // end if
-			
-		} // end try 
-		catch (NumberFormatException ex){
-			
-		} // end catch 
-	
-	} // actionPerformed 
-	
-	/* public static String infixToPostfix(String infix){
-		final String ops = "+-*^/"; 
-		StringBuilder sb = new StringBuilder(); 
-		Stack<Integer> stack = new Stack<>(); 
-		for(String token : infix.split("\\stack")){
-			if (token.isEmpty()){
-				continue; 
-			} // end if 
-			char a = token.charAt(0); 
-			int index = ops.indexOf(a); 
-			
-			// check for operator
-			if (index != -1){
-				if (stack.isEmpty()){
-					stack.push(index); 
-				} // end if
-				else{ 
-					while (!stack.isEmpty()){
-						int p2 = stack.peek()/2; 
-						int p1 = index/2; 
-						if(p2 > p1 || (p2 == p1 && a != '^')){
-							sb.append(ops.charAt(stack.pop())).append(' '); 
-						} // end if 
-						else break; 
-					} // end while
-					stack.push(index); 
-				} // end else 
-			} // end if
-			else if (a == '('){
-				stack.push(-2); 
-			} // end else if 
-			else if (a == ')'){
-				while(stack.peek() != -2){
-					sb.append(ops.charAt(stack.pop())).append(' '); 
-				} // end while
-				stack.pop(); 
-			} // end else if
-			else{
-				sb.append(token).append(' '); 
-			} // end else
-			while(!stack.isEmpty()){
-				sb.append(ops.charAt(stack.pop())).append(' '); 
-			} // end while
-			
-		} // end for 
-		return sb.toString();
-	} // end infixToPostfix */
-	
 	static String infixToPostfix(String infix) {
         final String ops = "-+/*^";
         StringBuilder sb = new StringBuilder();
         Stack<Integer> s = new Stack<>();
  
-        for (String token : infix.split("\\s")) {
+        for (String token : infix.split("")) {
             if (token.isEmpty())
                 continue;
             char c = token.charAt(0);
@@ -429,5 +364,42 @@ public class calculator {
         while (!s.isEmpty())
             sb.append(ops.charAt(s.pop())).append(' ');
         return sb.toString();
-    }
+    } // end infixToPostfix 
+	
+	private String evalPost(String string){
+		Stack<Double> secStack = new Stack(); 
+		Scanner scan = new Scanner(string); 
+		while (scan.hasNext()){
+			if(scan.hasNextInt()){
+				secStack.push(scan.nextDouble()); 
+			} // end if 
+			else {
+				double num2 = secStack.pop(); 
+				double num1 = secStack.pop();
+				String ops = scan.next(); 
+				
+				switch(ops){
+				case "+": 
+					secStack.push(num1 + num2); 
+					break; 
+				case "-": 
+					secStack.push(num1 - num2); 
+					break; 
+				case "*": 
+					secStack.push(num1 * num2); 
+					break; 
+				case "/": 
+					secStack.push(num1 / num2); 
+					break; 
+				case "^": 
+					secStack.push( Math.pow(num1, num2)); 
+					break; 
+				default: 
+					return null;  
+				} // end switch
+				return Double.toString(secStack.pop());
+			} // else 
+		} // end while		
+		return null; 
+	} // end evalPost
 } // end calculator 
